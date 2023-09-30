@@ -1,19 +1,19 @@
 package com.cherryframe.cherryframe.controller;
 
+import com.cherryframe.cherryframe.service.file.CherryFrameFileService;
+import com.cherryframe.cherryframe.service.file.impl.CherryFrameFileServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import static com.cherryframe.cherryframe.CherryFrameApplication.stage;
 
 
 public class StockManagerController {
@@ -23,59 +23,76 @@ public class StockManagerController {
     @FXML
     private TextField filePathArea;
     @FXML
-    private CheckBox productIdCheck, stockCountCheck, priceWithVatCheck, priceWithDiscountCheck, priceWithoutVatCheck;
+    private CheckBox stockUidCheck, usdPurchasePriceCheck, usdSellPriceCheck, usdProductPriceCheck, sellPrice1Check,
+            sellPrice2Check, sellPrice3Check, sellPrice4Check, purchasePrice1Check, purchasePrice2Check,
+            purchasePrice3Check, purchasePrice4Check;
     @FXML
-    private TextField productIdColumnIdx, stockCountColumnIdx, priceWithVatColumnIdx, priceWithDiscountColumnIdx, priceWithoutVatColumnIdx;
+    private ChoiceBox<String> stockUidChoice, usdPurchasePriceChoice, usdSellPriceChoice, usdProductPriceChoice, sellPrice1Choice,
+            sellPrice2Choice, sellPrice3Choice, sellPrice4Choice, purchasePrice1Choice, purchasePrice2Choice,
+            purchasePrice3Choice, purchasePrice4Choice;
+    private final List<ChoiceBox<String>> availableChoiceBoxes = new ArrayList<>();
+    private final List<CheckBox> availableCheckBoxes = new ArrayList<>();
+
+    private final CherryFrameFileService cherryFrameFileService = new CherryFrameFileServiceImpl();
+
 
     @FXML
-    protected void handleCheckboxOnClick() {
-        adjustVisibility(productIdCheck, productIdColumnIdx);
-        adjustVisibility(stockCountCheck, stockCountColumnIdx);
-        adjustVisibility(priceWithVatCheck, priceWithVatColumnIdx);
-        adjustVisibility(priceWithDiscountCheck, priceWithDiscountColumnIdx);
-        adjustVisibility(priceWithoutVatCheck, priceWithoutVatColumnIdx);
-    }
-
-    @FXML
-    protected void uploadFile() {
-        final FileChooser.ExtensionFilter excelFilesFilter = new FileChooser.ExtensionFilter("Excel File", "*.xlsx", "*.xls");
-        final FileChooser.ExtensionFilter pdfFilesFilter = new FileChooser.ExtensionFilter("PDF File", "*.pdf");
-
-        final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("CherryFrame File Chooser");
-        fileChooser.getExtensionFilters().addAll(excelFilesFilter, pdfFilesFilter);
-        final File selectedFile = fileChooser.showOpenDialog(stage);
-        filePathArea.appendText(selectedFile.getAbsolutePath());
+    protected void uploadFile() throws IOException {
+        // Initialize all available choice/check boxes into a list to reuse.
+        initializeChoiceBoxList();
+        initializeCheckBoxList();
+        // initialize FileChooser
+        cherryFrameFileService.initializeFileChooser(filePathArea);
+        // fill selection options & if not selected -> remove from available choice box list
+        for (int index = 0; index < availableCheckBoxes.size(); index++){
+            fillAvailableChoiceBoxOptions(availableCheckBoxes.get(index), availableChoiceBoxes.get(index));
+        }
+        // unlock import button
         importButton.setDisable(false);
     }
 
     @FXML
-    protected void importFromFile() throws IOException {
-        if (!filePathArea.getText().isEmpty())
-        {
-            final FileInputStream fileInputStream = new FileInputStream(filePathArea.getText());
-            final XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
-            final Sheet sheet = workbook.getSheetAt(0);
-            sheet.forEach(row ->
-            {
-                //in case of row title, break the loop
-                if (row.getRowNum() == 0)
-                {
-                    return;
-                }
-                System.out.println("-------\n" + row.getCell(Integer.parseInt(productIdColumnIdx.getText())).getStringCellValue() + "\n-------");
-                System.out.println(row.getCell(Integer.parseInt(stockCountColumnIdx.getText())).getNumericCellValue());
-                System.out.println(row.getCell(Integer.parseInt(priceWithVatColumnIdx.getText())).getNumericCellValue());
-                System.out.println(row.getCell(Integer.parseInt(priceWithDiscountColumnIdx.getText())).getNumericCellValue());
-                System.out.println(row.getCell(Integer.parseInt(priceWithoutVatColumnIdx.getText())).getNumericCellValue());
-            });
-            // TODO: Database connection
-            // TODO: update table with provided values by file
+    protected void handleCheckboxOnClick() {
+        // iterate and adjust visibility
+        for (int i = 0; i < availableCheckBoxes.size(); i++) {
+            adjustDropdownVisibility(availableCheckBoxes.get(i), availableChoiceBoxes.get(i));
         }
     }
 
-    private void adjustVisibility(final CheckBox checkBox, final TextField textField) {
-        textField.setVisible(checkBox.isSelected());
+    @FXML
+    protected void importFromFile() throws IOException {
+        if (!filePathArea.getText().isEmpty()) {
+            // Read & Initialize Sheet
+            final Sheet sheet = cherryFrameFileService.readSingleExcelFile(filePathArea.getText());
+            cherryFrameFileService.initializeAndImportFromFile(sheet, availableCheckBoxes, availableChoiceBoxes);
+        }
+    }
+
+    private void adjustDropdownVisibility(final CheckBox checkBox, final ChoiceBox<String> choiceBox) {
+        choiceBox.setVisible(checkBox.isSelected());
+    }
+
+    private void fillAvailableChoiceBoxOptions(final CheckBox checkBox, final ChoiceBox<String> choiceBox) throws IOException {
+        final Sheet sheet = cherryFrameFileService.readSingleExcelFile(filePathArea.getText());
+        for (final Row row : sheet) {
+            if (row.getRowNum() == 0) {
+                row.forEach(cell -> choiceBox.getItems().add(cell.getStringCellValue()));
+            }
+            break;
+        }
+    }
+
+    private void initializeCheckBoxList() {
+        availableCheckBoxes.addAll(List.of(stockUidCheck, usdPurchasePriceCheck, usdSellPriceCheck, usdProductPriceCheck,
+                sellPrice1Check, sellPrice2Check, sellPrice3Check, sellPrice4Check, purchasePrice1Check, purchasePrice2Check,
+                purchasePrice3Check, purchasePrice4Check));
+    }
+
+    private void initializeChoiceBoxList() {
+        availableChoiceBoxes.addAll(List.of(stockUidChoice, usdPurchasePriceChoice,
+                usdSellPriceChoice, usdProductPriceChoice, sellPrice1Choice, sellPrice2Choice, sellPrice3Choice,
+                sellPrice4Choice, purchasePrice1Choice, purchasePrice2Choice, purchasePrice3Choice,
+                purchasePrice4Choice));
     }
 }
 

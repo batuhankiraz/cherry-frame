@@ -1,6 +1,6 @@
-package com.cherryframe.cherryframe.controller;
+package com.cherryframe.cherryframe.controller.constants;
 
-public class CherryFrameControllerConstants {
+public final class CherryFrameControllerConstants {
 
     public interface Page {
         String STOCK_MANAGER_PAGE_UID = "frame/stock-manager.fxml";

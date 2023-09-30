@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
-import static com.cherryframe.cherryframe.controller.CherryFrameControllerConstants.Page.STOCK_MANAGER_PAGE_UID;
+import static com.cherryframe.cherryframe.controller.constants.CherryFrameControllerConstants.Page.STOCK_MANAGER_PAGE_UID;
 
 
 public class LoginController {
