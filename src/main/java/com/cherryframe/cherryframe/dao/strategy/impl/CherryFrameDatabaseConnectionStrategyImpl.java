@@ -4,6 +4,8 @@ import com.cherryframe.cherryframe.dao.strategy.CherryFrameDatabaseConnectionStr
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import static com.cherryframe.cherryframe.service.constants.CherryFrameCoreConstants.Database.*;
 
@@ -13,8 +15,6 @@ public class CherryFrameDatabaseConnectionStrategyImpl implements CherryFrameDat
     private static final String SQL_CONNECTION_PREFIX = "jdbc:sqlserver://" + SERVER_NAME + ":" + PORT_NUMBER + ";";
     private static final String SQL_CONNECTION_DATABASE_NAME_FILTER = "databaseName=" + DATABASE_NAME + ";";
     private static final String SQL_CONNECTION_ENCRYPT_FILTER = "encrypt=false;";
-    //private static final String SQL_CONNECTION_SECURITY_CREDENTIAL_FILTER = "user=" + USER_NAME + ";" + "password=" + PASSWORD + ";";
-    //private static final String SQL_CONNECTION_INTEGRATED_SECURITY_FILTER = "integratedSecurity=true;";
 
     @Override
     public Connection connect()
@@ -28,6 +28,22 @@ public class CherryFrameDatabaseConnectionStrategyImpl implements CherryFrameDat
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void closeConnection(final Connection connection) {
+        try {
+            connection.close();
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeStatement(final PreparedStatement statement) {
+        try {
+            statement.close();
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getConnectionUrl() {

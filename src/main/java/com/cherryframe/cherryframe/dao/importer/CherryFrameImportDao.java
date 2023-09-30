@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface CherryFrameImportDao {
 
-    void insertOrUpdate(RowData rowData, Connection connection);
+    void insertOrUpdate(RowData rowData);
 
     ResultSet findByStockCode(RowData rowData, Connection connection) throws SQLException;
 
     void insert(RowData rowData, Connection connection) throws SQLException;
 
-    void update();
+    void update(RowData rowData, Connection connection) throws SQLException;
 }
