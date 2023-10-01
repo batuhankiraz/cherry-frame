@@ -1,6 +1,5 @@
 package com.cherryframe.cherryframe.service.file.impl;
 
-import com.cherryframe.cherryframe.dao.data.ColumnData;
 import com.cherryframe.cherryframe.dao.data.RowData;
 import com.cherryframe.cherryframe.dao.data.SelectionData;
 import com.cherryframe.cherryframe.service.file.CherryFrameFileService;
@@ -8,6 +7,7 @@ import com.cherryframe.cherryframe.service.importer.CherryFrameImportService;
 import com.cherryframe.cherryframe.service.importer.impl.CherryFrameImportServiceImpl;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import org.apache.poi.ss.usermodel.Cell;
@@ -60,7 +60,7 @@ public class CherryFrameFileServiceImpl implements CherryFrameFileService {
 
     @Override
     public void initializeAndImportFromFile(final Sheet sheet, final List<CheckBox> availableCheckBoxes,
-                                            final List<ChoiceBox<String>> availableChoiceBoxes) {
+                                            final List<ChoiceBox<String>> availableChoiceBoxes, final TextArea infoTextArea) {
         final List<SelectionData> selectionDataList = createSelectionDataList(availableCheckBoxes, availableChoiceBoxes);
         final  List<SelectionData> rowSelectionDataList = new ArrayList<>();
         final List<RowData> rowDataList = new ArrayList<>();
@@ -90,11 +90,6 @@ public class CherryFrameFileServiceImpl implements CherryFrameFileService {
                         selectionData.setValueData(getCellValue(cell));
                         rowSelectionDataList.add(selectionData);
                     }
-                    else
-                    {
-                        final var cellAddress = cell.getAddress();
-                        System.out.println("[INFO] Cell skipped. Row: [" + cellAddress.getRow() + "] Column: [" + cellAddress.getColumn() + "]");
-                    }
                 }
                 rowData.setSelectionDataList(rowSelectionDataList.stream().filter(sd -> sd.getRowNumber() == row.getRowNum()).toList());
             }
@@ -102,7 +97,7 @@ public class CherryFrameFileServiceImpl implements CherryFrameFileService {
             rowDataList.add(rowData);
         }
         // send to db
-        cherryFrameImportService.importToServer(rowDataList);
+        cherryFrameImportService.importToServer(rowDataList, infoTextArea);
     }
 
     private List<SelectionData> createSelectionDataList(final List<CheckBox> availableCheckBoxes,

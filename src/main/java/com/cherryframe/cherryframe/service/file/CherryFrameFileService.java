@@ -2,6 +2,7 @@ package com.cherryframe.cherryframe.service.file;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -13,5 +14,5 @@ public interface CherryFrameFileService {
 
     void initializeFileChooser(TextField filePathArea);
 
-    void initializeAndImportFromFile(Sheet sheet, List<CheckBox> availableCheckBoxes, List<ChoiceBox<String>> availableChoiceBoxes);
+    void initializeAndImportFromFile(Sheet sheet, List<CheckBox> availableCheckBoxes, List<ChoiceBox<String>> availableChoiceBoxes, TextArea infoTextArea);
 }

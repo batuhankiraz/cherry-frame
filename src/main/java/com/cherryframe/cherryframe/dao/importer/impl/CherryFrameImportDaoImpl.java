@@ -5,6 +5,7 @@ import com.cherryframe.cherryframe.dao.importer.CherryFrameImportDao;
 import com.cherryframe.cherryframe.dao.data.RowData;
 import com.cherryframe.cherryframe.dao.strategy.CherryFrameDatabaseConnectionStrategy;
 import com.cherryframe.cherryframe.dao.strategy.impl.CherryFrameDatabaseConnectionStrategyImpl;
+import javafx.scene.control.TextArea;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,33 +21,29 @@ import static java.util.Objects.nonNull;
 
 public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
 
+    private static final String FIND_BY_STOCK_CODE_QUERY = "SELECT * FROM TBLSTSBT WHERE STOK_KODU = ?";
+    private static final String INSERT_TO_TBLSTSBT_QUERY_DOMAIN_PREFIX = "INSERT INTO TBLSTSBT (";
+    private static final String INSERT_TO_TBLSTSBT_QUERY_VALUES_PREFIX = " VALUES (";
+    private static final String UPDATE_TO_TBLSTSBT_QUERY_DOMAIN_PREFIX = "UPDATE TBLSTSBT SET ";
     private static final String DELIMITER = ",";
 
     private final CherryFrameDatabaseConnectionStrategy connectionStrategy = new CherryFrameDatabaseConnectionStrategyImpl();
 
 
     @Override
-    public void insertOrUpdate(final RowData rowData) {
-        final var connection = connectionStrategy.connect();
-        try{
-            final var result = findByStockCode(rowData, connection);
-            if (result.next()){
-                update(rowData, connection);
-            }
-            else {
-                insert(rowData, connection);
-            }
+    public void insertOrUpdate(final RowData rowData, final Connection connection, final TextArea infoTextArea) throws SQLException {
+        final var result = findByStockCode(rowData, connection);
+        if (result.next()){
+            update(rowData, connection, infoTextArea);
         }
-        catch (final SQLException e){
-            e.printStackTrace();
-        } finally {
-            connectionStrategy.closeConnection(connection);
+        else {
+            insert(rowData, connection, infoTextArea);
         }
     }
 
     @Override
     public ResultSet findByStockCode(final RowData rowData, final Connection connection) throws SQLException {
-        final var statement = connection.prepareStatement("SELECT * FROM TBLSTSBT WHERE STOK_KODU = ?");
+        final var statement = connection.prepareStatement(FIND_BY_STOCK_CODE_QUERY);
         final var stockCodeSelectionData = rowData.getSelectionDataByTitle(STOK_KODU_TITLE);
         final var stockCodeValue = (String)stockCodeSelectionData.getValueData().getValue(STRING);
         statement.setString(1, stockCodeValue);
@@ -55,9 +52,9 @@ public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
 
 
     @Override
-    public void insert(final RowData rowData, final Connection connection) {
-        final var queryDomainBuilder = new StringBuilder("INSERT INTO TBLSTSBT (");
-        final var queryValuesBuilder = new StringBuilder(" VALUES (");
+    public void insert(final RowData rowData, final Connection connection, final TextArea infoTextArea) {
+        final var queryDomainBuilder = new StringBuilder(INSERT_TO_TBLSTSBT_QUERY_DOMAIN_PREFIX);
+        final var queryValuesBuilder = new StringBuilder(INSERT_TO_TBLSTSBT_QUERY_VALUES_PREFIX);
         buildInsertQuery(rowData, queryDomainBuilder, queryValuesBuilder);
         final var query = queryDomainBuilder.append(queryValuesBuilder).toString();
         PreparedStatement statement = null;
@@ -65,22 +62,24 @@ public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
             statement = connection.prepareStatement(query);
             prepareAndExecuteInsertStatement(rowData, statement);
         } catch (final SQLException e){
-            e.printStackTrace();
+            infoTextArea.setVisible(true);
+            infoTextArea.setText("[" + e.getMessage() + "]\n\n");
         } finally {
             connectionStrategy.closeStatement(statement);
         }
     }
 
     @Override
-    public void update(final RowData rowData, final Connection connection) {
-        final var queryDomainBuilder = new StringBuilder("UPDATE TBLSTSBT SET ");
+    public void update(final RowData rowData, final Connection connection, final TextArea infoTextArea) {
+        final var queryDomainBuilder = new StringBuilder(UPDATE_TO_TBLSTSBT_QUERY_DOMAIN_PREFIX);
         buildUpdateQuery(rowData, queryDomainBuilder);
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(queryDomainBuilder.toString());
             prepareAndExecuteUpdateStatement(rowData, statement);
         } catch (final SQLException e){
-            e.printStackTrace();
+            infoTextArea.setVisible(true);
+            infoTextArea.setText("[" + e.getMessage() + "]\n\n");
         } finally {
             connectionStrategy.closeStatement(statement);
         }

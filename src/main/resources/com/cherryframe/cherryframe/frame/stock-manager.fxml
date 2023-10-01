@@ -9,7 +9,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.9" prefHeight="920.0" prefWidth="1400.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cherryframe.cherryframe.controller.StockManagerController">
     <children>
-        <TabPane prefHeight="920.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="50.0" tabMinWidth="150.0">
+        <TabPane prefHeight="920.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="35.0" tabMinWidth="120.0">
             <tabs>
                 <Tab text="Stock Manager">
                     <content>
@@ -158,13 +158,16 @@
                         <ChoiceBox fx:id="purchasePrice2Choice" layoutX="1138.0" layoutY="290.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" visible="false" />
                         <ChoiceBox fx:id="purchasePrice3Choice" layoutX="1138.0" layoutY="325.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" visible="false" />
                         <ChoiceBox fx:id="purchasePrice4Choice" layoutX="1138.0" layoutY="363.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" visible="false" />
+                        <TextArea fx:id="infoTextArea" editable="false" layoutX="412.0" layoutY="592.0" prefHeight="73.0" prefWidth="616.0" style="-fx-text-inner-color: black;" styleClass=".text-area" stylesheets="@../style/text-area-style.css" visible="false" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextArea>
                             </children>
                         </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Stock Informations">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                 </Tab>
             </tabs>

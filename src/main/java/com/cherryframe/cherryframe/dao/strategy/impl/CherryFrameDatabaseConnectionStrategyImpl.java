@@ -21,9 +21,7 @@ public class CherryFrameDatabaseConnectionStrategyImpl implements CherryFrameDat
     {
         try {
             Class.forName(SQL_DRIVER_CLASS_NAME);
-            final var connection = DriverManager.getConnection(getConnectionUrl(), USER_NAME, PASSWORD);
-            System.out.println("Successfully connected.");
-            return connection;
+            return DriverManager.getConnection(getConnectionUrl(), USER_NAME, PASSWORD);
         } catch (final Exception e) {
             e.printStackTrace();
         }
