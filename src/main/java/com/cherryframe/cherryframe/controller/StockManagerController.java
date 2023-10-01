@@ -2,13 +2,11 @@ package com.cherryframe.cherryframe.controller;
 
 import com.cherryframe.cherryframe.service.file.CherryFrameFileService;
 import com.cherryframe.cherryframe.service.file.impl.CherryFrameFileServiceImpl;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -118,7 +116,7 @@ public class StockManagerController {
         for (int i = 0; i < this.availableCheckBoxes.size(); i++) {
             if (this.availableCheckBoxes.get(i).isSelected()) {
                 final var choiceBox = this.availableChoiceBoxes.get(i);
-                if (isNull(choiceBox.getValue()) && choiceBox.getValue().isEmpty()) {
+                if (isNull(choiceBox.getValue())) {
                     errorDetection = true;
                     adjustChoiceBoxStyle(choiceBox);
                 }
