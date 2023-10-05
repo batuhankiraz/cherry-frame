@@ -1,13 +1,11 @@
 package com.cherryframe.cherryframe;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -29,7 +27,7 @@ public class CherryFrameApplication extends Application {
         primaryStage.setResizable(false);
         final Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(STOCK_MANAGER_PAGE_UID)));
         final Scene scene = new Scene(parent, MAIN_VERTICAL_SIZE, MAIN_HORIZONTAL_SIZE);
-        primaryStage.setTitle("Cherry Frame");
+        primaryStage.setTitle("Cherry Frame Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
