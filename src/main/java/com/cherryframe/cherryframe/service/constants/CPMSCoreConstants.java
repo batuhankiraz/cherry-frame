@@ -1,6 +1,6 @@
 package com.cherryframe.cherryframe.service.constants;
 
-public final class CherryFrameCoreConstants {
+public final class CPMSCoreConstants {
 
     public interface Database{
         String PORT_NUMBER = "1433";
@@ -11,7 +11,7 @@ public final class CherryFrameCoreConstants {
     }
 
     public interface FileChooserExtension {
-        String FILE_CHOOSER_TITLE = "CherryFrame File Chooser";
+        String FILE_CHOOSER_TITLE = "CherryPick Management Studio File Chooser";
         String EXCEL_FILTER_NAME = "Excel";
         String PDF_FILTER_NAME = "PDF";
         String[] EXCEL_FILTER_OPTIONS = {"*.xlsx", "*.xls"};

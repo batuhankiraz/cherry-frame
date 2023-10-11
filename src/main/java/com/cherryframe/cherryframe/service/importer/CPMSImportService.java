@@ -6,7 +6,7 @@ import javafx.scene.control.TextArea;
 
 import java.util.List;
 
-public interface CherryFrameImportService {
+public interface CPMSImportService {
 
     void importToServer(List<RowData> rowDataList, TextArea infoTextArea);
 }

@@ -1,8 +1,8 @@
 .anchor-image-body
 {
-    -fx-background-image: url(../image/cherry-frame.png);
+    -fx-background-image: url(../image/cpms-open.png);
     -fx-background-size: contain;
-    -fx-backoground-repeat: no-repeat;
+    -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 100% 100%;
 }

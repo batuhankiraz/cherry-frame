@@ -1,7 +1,16 @@
 .text-area {
-    text-area-background: #f2be04 ;
+    text-area-background: #edede8 ;
 }
 
 .text-area .content {
     -fx-background-color: text-area-background ;
+    -fx-text-alignment: center;
+}
+
+.text-area *.text {
+    -fx-text-alignment: center;
+}
+
+.text-area:focused .content {
+    -fx-background-color: text-area-background;
 }

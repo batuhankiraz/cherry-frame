@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface CherryFrameImportDao {
+public interface CPMSImportDao {
 
     void insertOrUpdate(RowData rowData, Connection connection, TextArea infoTextArea) throws SQLException;
 

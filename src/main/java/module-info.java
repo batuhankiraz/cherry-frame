@@ -10,8 +10,8 @@ module com.cherryframe.cherryframe {
 
     opens com.cherryframe.cherryframe to javafx.fxml;
     exports com.cherryframe.cherryframe;
-    exports com.cherryframe.cherryframe.controller;
-    opens com.cherryframe.cherryframe.controller to javafx.fxml;
-    exports com.cherryframe.cherryframe.controller.constants;
-    opens com.cherryframe.cherryframe.controller.constants to javafx.fxml;
+    exports com.cherryframe.cherryframe.storefront.controller;
+    opens com.cherryframe.cherryframe.storefront.controller to javafx.fxml;
+    exports com.cherryframe.cherryframe.storefront.constants;
+    opens com.cherryframe.cherryframe.storefront.constants to javafx.fxml;
 }

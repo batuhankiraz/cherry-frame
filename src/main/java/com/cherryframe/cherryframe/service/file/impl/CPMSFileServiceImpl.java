@@ -2,9 +2,9 @@ package com.cherryframe.cherryframe.service.file.impl;
 
 import com.cherryframe.cherryframe.dao.data.RowData;
 import com.cherryframe.cherryframe.dao.data.SelectionData;
-import com.cherryframe.cherryframe.service.file.CherryFrameFileService;
-import com.cherryframe.cherryframe.service.importer.CherryFrameImportService;
-import com.cherryframe.cherryframe.service.importer.impl.CherryFrameImportServiceImpl;
+import com.cherryframe.cherryframe.service.file.CPMSFileService;
+import com.cherryframe.cherryframe.service.importer.CPMSImportService;
+import com.cherryframe.cherryframe.service.importer.impl.CPMSImportServiceImpl;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -23,14 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.cherryframe.cherryframe.CherryFrameApplication.STAGE;
-import static com.cherryframe.cherryframe.service.constants.CherryFrameCoreConstants.FileChooserExtension.*;
-import static com.cherryframe.cherryframe.service.utils.CherryFrameCoreUtils.getCellValue;
+import static com.cherryframe.cherryframe.service.constants.CPMSCoreConstants.FileChooserExtension.*;
+import static com.cherryframe.cherryframe.service.utils.CPMSCoreUtils.getCellValue;
 import static java.util.Objects.nonNull;
 
 
-public class CherryFrameFileServiceImpl implements CherryFrameFileService {
+public class CPMSFileServiceImpl implements CPMSFileService {
 
-    private final CherryFrameImportService cherryFrameImportService = new CherryFrameImportServiceImpl();
+    private final CPMSImportService CPMSImportService = new CPMSImportServiceImpl();
 
 
     @Override
@@ -97,7 +97,7 @@ public class CherryFrameFileServiceImpl implements CherryFrameFileService {
             rowDataList.add(rowData);
         }
         // send to db
-        cherryFrameImportService.importToServer(rowDataList, infoTextArea);
+        CPMSImportService.importToServer(rowDataList, infoTextArea);
     }
 
     private List<SelectionData> createSelectionDataList(final List<CheckBox> availableCheckBoxes,

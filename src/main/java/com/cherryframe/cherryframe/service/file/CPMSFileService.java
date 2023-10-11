@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import java.io.IOException;
 import java.util.List;
 
-public interface CherryFrameFileService {
+public interface CPMSFileService {
     Sheet readSingleExcelFile(String filePath) throws IOException;
 
     void initializeFileChooser(TextField filePathArea);

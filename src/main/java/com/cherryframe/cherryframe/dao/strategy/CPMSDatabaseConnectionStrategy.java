@@ -3,7 +3,7 @@ package com.cherryframe.cherryframe.dao.strategy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public interface CherryFrameDatabaseConnectionStrategy {
+public interface CPMSDatabaseConnectionStrategy {
 
     Connection connect();
 

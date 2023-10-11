@@ -4,7 +4,7 @@ import com.cherryframe.cherryframe.dao.data.ValueData;
 import com.cherryframe.cherryframe.dao.data.ValueTypeEnum;
 import org.apache.poi.ss.usermodel.Cell;
 
-public class CherryFrameCoreUtils {
+public class CPMSCoreUtils {
 
     public static ValueData getCellValue(final Cell cell) {
         final var valueData = new ValueData();

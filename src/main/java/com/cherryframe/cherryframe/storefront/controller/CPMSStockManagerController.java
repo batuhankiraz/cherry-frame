@@ -1,7 +1,7 @@
-package com.cherryframe.cherryframe.controller;
+package com.cherryframe.cherryframe.storefront.controller;
 
-import com.cherryframe.cherryframe.service.file.CherryFrameFileService;
-import com.cherryframe.cherryframe.service.file.impl.CherryFrameFileServiceImpl;
+import com.cherryframe.cherryframe.service.file.CPMSFileService;
+import com.cherryframe.cherryframe.service.file.impl.CPMSFileServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -9,16 +9,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.image.ImageView;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 
-public class StockManagerController {
+public class CPMSStockManagerController {
 
     @FXML
     private Button importButton;
+    @FXML
+    private ImageView importIcon;
     @FXML
     private TextField filePathArea;
     @FXML
@@ -31,26 +35,31 @@ public class StockManagerController {
     private ChoiceBox<String> stockUidChoice, usdPurchasePriceChoice, usdSellPriceChoice, usdProductPriceChoice, sellPrice1Choice,
             sellPrice2Choice, sellPrice3Choice, sellPrice4Choice, purchasePrice1Choice, purchasePrice2Choice,
             purchasePrice3Choice, purchasePrice4Choice;
+
     private final List<ChoiceBox<String>> availableChoiceBoxes = new ArrayList<>();
     private final List<CheckBox> availableCheckBoxes = new ArrayList<>();
-
-    private final CherryFrameFileService cherryFrameFileService = new CherryFrameFileServiceImpl();
+    private final CPMSFileService CPMSFileService = new CPMSFileServiceImpl();
 
 
     @FXML
     protected void uploadFile() throws IOException {
+        if (nonNull(filePathArea.getText()))
+        {
+            filePathArea.setText(null);
+        }
         infoTextArea.setVisible(false);
         // Initialize all available choice/check boxes into a list to reuse.
         initializeChoiceBoxList();
         initializeCheckBoxList();
         // initialize FileChooser
-        cherryFrameFileService.initializeFileChooser(filePathArea);
+        CPMSFileService.initializeFileChooser(filePathArea);
         // fill selection options & if not selected -> remove from available choice box list
         for (int index = 0; index < availableCheckBoxes.size(); index++) {
             fillAvailableChoiceBoxOptions(availableChoiceBoxes.get(index));
         }
         // unlock import button
         importButton.setDisable(false);
+        importIcon.setDisable(false);
     }
 
     @FXML
@@ -70,14 +79,14 @@ public class StockManagerController {
             // Read & Initialize Sheet
             try {
                 if (!stockUidCheck.isSelected()) {
-                    throw new IllegalStateException("Stock Code field have to be checked.");
+                    throw new IllegalStateException("Stock Code field need to be checked!");
                 }
-                final Sheet sheet = cherryFrameFileService.readSingleExcelFile(filePathArea.getText());
-                cherryFrameFileService.initializeAndImportFromFile(sheet, availableCheckBoxes, availableChoiceBoxes, infoTextArea);
+                final Sheet sheet = CPMSFileService.readSingleExcelFile(filePathArea.getText());
+                CPMSFileService.initializeAndImportFromFile(sheet, availableCheckBoxes, availableChoiceBoxes, infoTextArea);
                 refreshImporter();
             } catch (final Exception e) {
                 infoTextArea.setVisible(true);
-                infoTextArea.setText("[" + e.getMessage() + "]\n\n");
+                infoTextArea.setText(e.getMessage());
             }
         }
     }
@@ -87,14 +96,17 @@ public class StockManagerController {
     }
 
     private void fillAvailableChoiceBoxOptions(final ChoiceBox<String> choiceBox) throws IOException {
-        final Sheet sheet = cherryFrameFileService.readSingleExcelFile(filePathArea.getText());
-        for (final Row row : sheet) {
-            if (row.getRowNum() == 0) {
-                if (choiceBox.getItems().size() == 0) {
-                    row.forEach(cell -> choiceBox.getItems().add(cell.getStringCellValue()));
+        if (nonNull(filePathArea.getText()))
+        {
+            final Sheet sheet = CPMSFileService.readSingleExcelFile(filePathArea.getText());
+            for (final Row row : sheet) {
+                if (row.getRowNum() == 0) {
+                    if (choiceBox.getItems().size() == 0) {
+                        row.forEach(cell -> choiceBox.getItems().add(cell.getStringCellValue()));
+                    }
                 }
+                break;
             }
-            break;
         }
     }
 
@@ -128,7 +140,7 @@ public class StockManagerController {
     private void isInErrorDetection(boolean errorDetection) {
         if (errorDetection) {
             infoTextArea.setVisible(true);
-            infoTextArea.setText("Please check your selected items. There are several items which is not matched with value! \n\n");
+            infoTextArea.setText("Please check your selected items. There are several items which are not matched with a value!");
         }
     }
 
@@ -144,6 +156,7 @@ public class StockManagerController {
         }
         filePathArea.setText(null);
         importButton.setDisable(true);
+        importIcon.setDisable(true);
     }
 }
 

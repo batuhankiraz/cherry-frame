@@ -1,10 +1,10 @@
 package com.cherryframe.cherryframe.dao.importer.impl;
 
 import com.cherryframe.cherryframe.dao.data.SelectionData;
-import com.cherryframe.cherryframe.dao.importer.CherryFrameImportDao;
+import com.cherryframe.cherryframe.dao.importer.CPMSImportDao;
 import com.cherryframe.cherryframe.dao.data.RowData;
-import com.cherryframe.cherryframe.dao.strategy.CherryFrameDatabaseConnectionStrategy;
-import com.cherryframe.cherryframe.dao.strategy.impl.CherryFrameDatabaseConnectionStrategyImpl;
+import com.cherryframe.cherryframe.dao.strategy.CPMSDatabaseConnectionStrategy;
+import com.cherryframe.cherryframe.dao.strategy.impl.CPMSDatabaseConnectionStrategyImpl;
 import javafx.scene.control.TextArea;
 
 import java.sql.Connection;
@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.cherryframe.cherryframe.dao.data.ValueTypeEnum.*;
-import static com.cherryframe.cherryframe.dao.utils.CherryFrameDataAccessUtils.isLastIndexOf;
-import static com.cherryframe.cherryframe.service.constants.CherryFrameCoreConstants.AvailableCheckBoxTitle.*;
+import static com.cherryframe.cherryframe.dao.utils.CPMSDataAccessUtils.isLastIndexOf;
+import static com.cherryframe.cherryframe.service.constants.CPMSCoreConstants.AvailableCheckBoxTitle.*;
 import static java.util.Objects.nonNull;
 
-public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
+public class CPMSImportDaoImpl implements CPMSImportDao {
 
     private static final String FIND_BY_STOCK_CODE_QUERY = "SELECT * FROM TBLSTSBT WHERE STOK_KODU = ?";
     private static final String INSERT_TO_TBLSTSBT_QUERY_DOMAIN_PREFIX = "INSERT INTO TBLSTSBT (";
@@ -27,7 +27,7 @@ public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
     private static final String UPDATE_TO_TBLSTSBT_QUERY_DOMAIN_PREFIX = "UPDATE TBLSTSBT SET ";
     private static final String DELIMITER = ",";
 
-    private final CherryFrameDatabaseConnectionStrategy connectionStrategy = new CherryFrameDatabaseConnectionStrategyImpl();
+    private final CPMSDatabaseConnectionStrategy connectionStrategy = new CPMSDatabaseConnectionStrategyImpl();
 
 
     @Override
@@ -63,7 +63,7 @@ public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
             prepareAndExecuteInsertStatement(rowData, statement);
         } catch (final SQLException e){
             infoTextArea.setVisible(true);
-            infoTextArea.setText("[" + e.getMessage() + "]\n\n");
+            infoTextArea.setText("[" + e.getMessage() + "]");
         } finally {
             connectionStrategy.closeStatement(statement);
         }
@@ -79,7 +79,7 @@ public class CherryFrameImportDaoImpl implements CherryFrameImportDao {
             prepareAndExecuteUpdateStatement(rowData, statement);
         } catch (final SQLException e){
             infoTextArea.setVisible(true);
-            infoTextArea.setText("[" + e.getMessage() + "]\n\n");
+            infoTextArea.setText("[" + e.getMessage() + "]");
         } finally {
             connectionStrategy.closeStatement(statement);
         }

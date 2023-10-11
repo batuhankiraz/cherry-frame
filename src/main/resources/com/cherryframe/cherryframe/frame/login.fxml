@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane cacheShape="false" centerShape="false" prefHeight="920.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cherryframe.cherryframe.controller.LoginController">
+<BorderPane cacheShape="false" centerShape="false" prefHeight="920.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cherryframe.cherryframe.storefront.controller.CPMSLoginController">
     <left>
-        <AnchorPane prefHeight="920.0" prefWidth="851.0" styleClass="anchor-image-body" stylesheets="@../style/responsive-image.css" BorderPane.alignment="CENTER">
+        <AnchorPane cacheShape="false" prefHeight="920.0" prefWidth="851.0" styleClass="anchor-image-body" stylesheets="@../style/responsive-image.css" BorderPane.alignment="CENTER">
         </AnchorPane>
     </left>
    <center>
-        <AnchorPane prefHeight="750.0" prefWidth="400.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="750.0" prefWidth="400.0" style="-fx-background-color: #edede8;" BorderPane.alignment="CENTER">
             <children>
             <VBox layoutX="87.0" layoutY="181.0" AnchorPane.leftAnchor="87.0" />
                 <TextField fx:id="username" layoutX="223.0" layoutY="272.0" prefHeight="25.0" prefWidth="245.0" promptText="Username" style="-fx-background-color: #f2be04;" />
@@ -23,22 +23,25 @@
                 </ImageView>
                 <Label contentDisplay="CENTER" layoutX="113.0" layoutY="271.0" text="Username" textFill="#f2be04">
                     <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
                 <Label contentDisplay="CENTER" layoutX="113.0" layoutY="336.0" text="Password" textFill="#f2be04">
                     <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
                 <PasswordField fx:id="password" layoutX="223.0" layoutY="337.0" prefHeight="25.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: #f2be04;" />
-            <ImageView fx:id="loginFormWarningIcon" fitHeight="35.0" fitWidth="38.0" layoutX="41.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="loginFormWarningIcon" fitHeight="35.0" fitWidth="66.0" layoutX="276.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../image/warning.png" />
                </image>
             </ImageView>
-            <Label fx:id="loginErrorText" contentDisplay="CENTER" layoutX="166.0" layoutY="618.0" prefHeight="47.0" prefWidth="259.0" textFill="#f2be04" underline="true" wrapText="true" />
-                <Button alignment="CENTER" layoutX="201.0" layoutY="693.0" mnemonicParsing="false" onMouseClicked="#onLogin" prefHeight="55.0" prefWidth="189.0" style="-fx-background-color: #f2be04;" text="Login" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Label fx:id="loginErrorText" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="584.0" opacity="0.9" prefHeight="80.0" prefWidth="450.0" textAlignment="CENTER" textFill="#0a0a0a" underline="true" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+                <Button alignment="CENTER" layoutX="265.0" layoutY="737.0" mnemonicParsing="false" onMouseClicked="#onLogin" prefHeight="55.0" prefWidth="116.0" style="-fx-background-color: #edede8;" text="Login" textAlignment="CENTER" textFill="#f2be04" textOverrun="CENTER_WORD_ELLIPSIS">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -48,10 +51,18 @@
                 </Button>
             <Label contentDisplay="CENTER" layoutX="113.0" layoutY="398.0" text="Workspace" textFill="#f2be04">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="workspaceChoice" layoutX="223.0" layoutY="399.0" prefHeight="25.0" prefWidth="245.0" style="-fx-background-color: #f2be04;" />
+            <ChoiceBox fx:id="workspaceChoice" layoutX="223.0" layoutY="399.0" onContextMenuRequested="#getAvailableWorkspaces" onMouseClicked="#getAvailableWorkspaces" prefHeight="25.0" prefWidth="245.0" style="-fx-background-color: #f2be04;" stylesheets="@../style/login-choice-box-style.css" />
+            <ImageView fitHeight="77.0" fitWidth="61.0" layoutX="233.0" layoutY="734.0" onMouseClicked="#onLogin" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/login.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
             </children>
         </AnchorPane>
    </center>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1400.0" style="-fx-background-color: #edede8;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cherryframe.cherryframe.storefront.controller.CPMSStockManagerController">
+    <children>
+        <TabPane prefHeight="920.0" prefWidth="1400.0" snapToPixel="false" stylesheets="@../style/tab-pane-style.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="45.0" tabMaxWidth="210.0" tabMinHeight="45.0" tabMinWidth="210.0">
+            <tabs>
+                <!-- Account Tab -->
+                <Tab closable="false" text="Company Account">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="57.0">
+                            <image>
+                                <Image url="@../image/account.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ImageView accessibleRole="BUTTON" fitHeight="56.0" fitWidth="64.0" layoutX="351.0" layoutY="77.0" onMouseClicked="#uploadFile" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/upload.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                                <Label layoutX="14.0" layoutY="36.0" prefHeight="21.0" prefWidth="390.0" text="1. Select your file to import details into database." textFill="#f2be04" underline="true">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="14.0" layoutY="194.0" prefHeight="37.0" prefWidth="762.0" text="2. Select your fields from available choices to be updated on database by your uploaded document." textFill="#f2be04" underline="true">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- END - Account Tab -->
+
+                <!-- Stock Management Tab -->
+                <Tab closable="false" text="Stock Management">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="57.0">
+                            <image>
+                                <Image url="@../image/stock-management-icon.png" />
+                            </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                        </ImageView>
+                    </graphic>
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ImageView accessibleRole="BUTTON" fitHeight="56.0" fitWidth="64.0" layoutX="351.0" layoutY="77.0" onMouseClicked="#uploadFile" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/upload.png" />
+                                    </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                                </ImageView>
+                        <Label layoutX="14.0" layoutY="36.0" prefHeight="21.0" prefWidth="390.0" text="1. Select your file to import details into database." textFill="#f2be04" underline="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="194.0" prefHeight="37.0" prefWidth="762.0" text="2. Select your fields from available choices to be updated on database by your uploaded document." textFill="#f2be04" underline="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <CheckBox id="STOK_KODU" fx:id="stockUidCheck" layoutX="62.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Stok Kodu">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="DOV_ALIS_FIAT" fx:id="usdPurchasePriceCheck" layoutX="62.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Doviz Alış Fiyatı">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="DOV_SATIS_FIAT" fx:id="usdSellPriceCheck" layoutX="62.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Doviz Satış Fiyatı">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="DOV_MAL_FIAT" fx:id="usdProductPriceCheck" layoutX="62.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Doviz Mal Fiyatı">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="SATIS_FIAT1" fx:id="sellPrice1Check" layoutX="552.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Satış Fiyatı 1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="SATIS_FIAT2" fx:id="sellPrice2Check" layoutX="552.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Satış Fiyatı 2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="SATIS_FIAT3" fx:id="sellPrice3Check" layoutX="552.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Satış Fiyatı 3">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="SATIS_FIAT4" fx:id="sellPrice4Check" layoutX="552.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Satış Fiyatı 4">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="ALIS_FIAT1" fx:id="purchasePrice1Check" layoutX="1023.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Alış Fiyatı 1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <Button fx:id="importButton" alignment="CENTER" disable="true" layoutX="688.0" layoutY="720.0" mnemonicParsing="false" onMouseClicked="#importFromFile" prefHeight="66.0" prefWidth="113.0" style="-fx-background-radius: 15; -fx-background-color: #edede8;" text="Import" textFill="#f2be04">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <TextField fx:id="filePathArea" alignment="CENTER" editable="false" layoutX="417.0" layoutY="91.0" prefHeight="25.0" prefWidth="606.0" style="-fx-text-inner-color: white; -fx-background-color: #f2be04;">
+                           <font>
+                              <Font size="13.0" />
+                           </font></TextField>
+                        <ImageView fx:id="importIcon" disable="true" fitHeight="70.0" fitWidth="76.0" layoutX="639.0" layoutY="718.0" onMouseClicked="#importFromFile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/import.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <ChoiceBox fx:id="sellPrice1Choice" layoutX="698.0" layoutY="254.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="sellPrice2Choice" layoutX="698.0" layoutY="289.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="sellPrice3Choice" layoutX="698.0" layoutY="325.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="sellPrice4Choice" layoutX="698.0" layoutY="363.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="purchasePrice1Choice" layoutX="1138.0" layoutY="254.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="stockUidChoice" layoutX="213.0" layoutY="254.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="usdPurchasePriceChoice" layoutX="213.0" layoutY="290.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="usdSellPriceChoice" layoutX="213.0" layoutY="325.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="usdProductPriceChoice" layoutX="213.0" layoutY="363.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <CheckBox id="ALIS_FIAT2" fx:id="purchasePrice2Check" layoutX="1023.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Alış Fiyatı 2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="ALIS_FIAT3" fx:id="purchasePrice3Check" layoutX="1023.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Alış Fiyatı 3">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <CheckBox id="ALIS_FIAT4" fx:id="purchasePrice4Check" layoutX="1023.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#handleCheckboxOnClick" prefHeight="36.0" prefWidth="192.0" text="Alış Fiyatı 4">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <ChoiceBox fx:id="purchasePrice2Choice" layoutX="1138.0" layoutY="290.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="purchasePrice3Choice" layoutX="1138.0" layoutY="325.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <ChoiceBox fx:id="purchasePrice4Choice" layoutX="1138.0" layoutY="363.0" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #f2be04; -fx-border-radius: 15; -fx-border-style: solid inside; -fx-background-radius: 15; -fx-border-color: #f2be04;" stylesheets="@../style/sm-choice-box-style.css" visible="false" />
+                        <TextArea fx:id="infoTextArea" editable="false" layoutX="422.0" layoutY="658.0" prefHeight="60.0" prefWidth="552.0" style="-fx-text-inner-color: red; -fx-border-color: #edede8;" styleClass=".text-area" stylesheets="@../style/text-area-style.css" visible="false">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextArea>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- END - Stock Management Tab -->
+            </tabs>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+        </TabPane>
+    </children>
+</VBox>
