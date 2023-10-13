@@ -15,24 +15,24 @@
         <AnchorPane prefHeight="750.0" prefWidth="400.0" style="-fx-background-color: #edede8;" BorderPane.alignment="CENTER">
             <children>
             <VBox layoutX="87.0" layoutY="181.0" AnchorPane.leftAnchor="87.0" />
-                <TextField fx:id="username" layoutX="223.0" layoutY="272.0" prefHeight="25.0" prefWidth="245.0" promptText="Username" style="-fx-background-color: #f2be04;" />
+                <TextField fx:id="username" layoutX="223.0" layoutY="272.0" prefHeight="25.0" prefWidth="245.0" promptText="Username" style="-fx-background-color: #edede8; -fx-border-color: #f2be04; -fx-border-radius: 7px;" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="220.0" layoutY="31.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
                     <image>
                         <Image url="@../image/lock.png" />
                     </image>
                 </ImageView>
-                <Label contentDisplay="CENTER" layoutX="113.0" layoutY="271.0" text="Username" textFill="#f2be04">
+                <Label contentDisplay="CENTER" layoutX="129.0" layoutY="276.0" text="Username" textFill="#f2be04">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label contentDisplay="CENTER" layoutX="113.0" layoutY="336.0" text="Password" textFill="#f2be04">
+                <Label contentDisplay="CENTER" layoutX="129.0" layoutY="341.0" text="Password" textFill="#f2be04">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <PasswordField fx:id="password" layoutX="223.0" layoutY="337.0" prefHeight="25.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: #f2be04;" />
-            <ImageView fx:id="loginFormWarningIcon" fitHeight="35.0" fitWidth="66.0" layoutX="276.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                <PasswordField fx:id="password" layoutX="223.0" layoutY="337.0" prefHeight="25.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: #edede8; -fx-border-color: #f2be04; -fx-border-radius: 7px;" />
+            <ImageView fx:id="loginFormWarningIcon" fitHeight="35.0" fitWidth="66.0" layoutX="278.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../image/warning.png" />
                </image>
@@ -49,12 +49,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                 </Button>
-            <Label contentDisplay="CENTER" layoutX="113.0" layoutY="398.0" text="Workspace" textFill="#f2be04">
+            <Label contentDisplay="CENTER" layoutX="129.0" layoutY="403.0" text="Workspace" textFill="#f2be04">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="workspaceChoice" layoutX="223.0" layoutY="399.0" onContextMenuRequested="#getAvailableWorkspaces" onMouseClicked="#getAvailableWorkspaces" prefHeight="25.0" prefWidth="245.0" style="-fx-background-color: #f2be04;" stylesheets="@../style/login-choice-box-style.css" />
+            <ChoiceBox fx:id="workspaceChoice" layoutX="223.0" layoutY="399.0" prefHeight="25.0" prefWidth="245.0" style="-fx-background-color: #edede8; -fx-border-color: #f2be04; -fx-border-radius: 7px;" stylesheets="@../style/login-choice-box-style.css" />
             <ImageView fitHeight="77.0" fitWidth="61.0" layoutX="233.0" layoutY="734.0" onMouseClicked="#onLogin" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/login.png" />
