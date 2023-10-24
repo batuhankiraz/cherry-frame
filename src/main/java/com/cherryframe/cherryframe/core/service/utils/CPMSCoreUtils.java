@@ -4,6 +4,10 @@ import com.cherryframe.cherryframe.core.dao.data.ValueData;
 import com.cherryframe.cherryframe.core.dao.data.ValueTypeEnum;
 import org.apache.poi.ss.usermodel.Cell;
 
+import java.util.List;
+
+import static com.cherryframe.cherryframe.core.constants.CPMSCoreConstants.DatabaseTable.TBLSTSBT;
+
 public class CPMSCoreUtils {
 
     public static ValueData getCellValue(final Cell cell) {
@@ -23,5 +27,9 @@ public class CPMSCoreUtils {
             }
         }
         return valueData;
+    }
+
+    public static List<String> getAvailableWorkspaces(){
+        return List.of(TBLSTSBT);
     }
 }
