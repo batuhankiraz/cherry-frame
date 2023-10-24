@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.cherryframe.cherryframe.CherryFrameApplication.changeScene;
+import static com.cherryframe.cherryframe.core.service.utils.CPMSCoreUtils.getAvailableWorkspaces;
 import static com.cherryframe.cherryframe.storefront.constants.CPMSControllerConstants.Page.MANAGEMENT_STUDIO_PAGE_UID;
 import static com.cherryframe.cherryframe.storefront.constants.CPMSControllerConstants.ValidationMessages.UNABLE_TO_LOGIN_EMPTY_CREDENTIALS;
 import static com.cherryframe.cherryframe.storefront.constants.CPMSControllerConstants.ValidationMessages.UNABLE_TO_LOGIN_INVALID_CREDENTIALS;
@@ -70,14 +71,8 @@ public class CPMSLoginController implements Initializable {
     }
 
     private void initWorkspaceChoices() {
-        final List<String> items = new ArrayList<>();
-        items.add("Table-1");
-        items.add("Table-2");
-        items.add("Table-3");
-        items.add("Table-4");
-        items.add("Table-5");
         workspaceChoice.getItems().clear();
-        workspaceChoice.setItems(FXCollections.observableList(items));
+        workspaceChoice.setItems(FXCollections.observableList(getAvailableWorkspaces()));
     }
 
     private LoginForm populateLoginForm(final String username, final String password, final String workspace) {

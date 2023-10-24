@@ -28,6 +28,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import static com.cherryframe.cherryframe.CherryFrameApplication.changeScene;
+import static com.cherryframe.cherryframe.core.service.utils.CPMSCoreUtils.getAvailableWorkspaces;
 import static com.cherryframe.cherryframe.storefront.constants.CPMSControllerConstants.Page.LOGIN_PAGE_UID;
 import static com.cherryframe.cherryframe.storefront.constants.CPMSControllerConstants.ValidationMessages.*;
 import static com.cherryframe.cherryframe.storefront.constants.CPMSControllerConstants.ValidationStyles.CHOICE_BOX_ON_ERROR_DETECTION_STYLE;
@@ -238,14 +239,8 @@ public class CPMSManagementStudioTabPaneController implements Initializable {
     }
 
     private void initWorkspaceChoices() {
-        final List<String> items = new ArrayList<>();
-        items.add("Table-1");
-        items.add("Table-2");
-        items.add("Table-3");
-        items.add("Table-4");
-        items.add("Table-5");
         workspaceChoice.getItems().clear();
-        workspaceChoice.setItems(FXCollections.observableList(items));
+        workspaceChoice.setItems(FXCollections.observableList(getAvailableWorkspaces()));
     }
 
     private void initFieldsOfSession() {
